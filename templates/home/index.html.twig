@@ -53,7 +53,7 @@
                     <thead>
                     <tr>
                         <th>Nom</th>
-                        <th>Adresse</th>
+                        <th>Email</th>
                         <th>Téléphone</th>
                         <th>Site internet</th>
                     </tr>
@@ -61,13 +61,18 @@
                     <tbody>
                     {% for etablissement in ettablissements %}
                         <tr>
-                            <td>{{ etablissement.properties.nom }}</td>
-                            <td>{{ etablissement.properties.adresses[0].lignes[0] }}</td>
-                            <td>{{ etablissement.properties.telephone }}</td>
-                            <td><a href="{{ etablissement.properties.url ?? ''}}" target="_blank">Cliquez-ici</a></td>
+                            <td>{{ etablissement.properties.nom ?? '-'}}</td>
+                            <td>{{ etablissement.properties.email ?? '-'}}</td>
+                            <td>{{ etablissement.properties.telephone ?? '-'}}</td>
+                            {% if etablissement.properties.url is defined %}
+                                <td><a href="{{ etablissement.properties.url ?? ''}}" target="_blank">Cliquez-ici</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+
                         </tr>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="2">
                                 {% for horaires in etablissement.properties.horaires %}
                                     <ul>
 
@@ -79,6 +84,16 @@
                                         {% for heures in horaires.heures %}
                                             <li>de {{ heures.de }} à {{ heures.a }}</li>
                                         {% endfor %}
+                                    </ul>
+
+                                {% endfor %}
+
+                            </td>
+                            <td colspan="2">
+                                {% for adresse in etablissement.properties.adresses %}
+                                    <ul>
+
+                                        <li>{{ adresse.lignes[0] }} {{ adresse.commune }} {{ adresse.codePostal }}</li>
                                     </ul>
 
                                 {% endfor %}
