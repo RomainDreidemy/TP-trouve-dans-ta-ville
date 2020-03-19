@@ -16,7 +16,7 @@
         <form method="post" class="border rounded p-4">
             <div class="form-group">
                 <label for="ville">Indiquez le nom d'une ville (obligatoire) :</label>
-                <input type="text" class="form-control" name="ville" list="villes" required/>
+                <input type="text" class="form-control" name="ville" list="villes"/>
                 <datalist id="villes">
                     <select name="villes">
                         {% for commune in communesForList %}
@@ -30,12 +30,12 @@
 
 
             <label for="codePostal">Indiquez un code postal (obligatoire) :</label>
-            <input type="number" class="form-control" name="codePostal" minlength="5" maxlength="5" list="codePostals" required>
+            <input type="number" class="form-control" name="codePostal" minlength="5" maxlength="5" list="codePostals">
             <datalist id="codePostals">
                 <select name="codePostals">
                     {% for codePostal in codePostalList %}
                         {% if codePostal is not empty %}
-                            <option value="{{ codePostal  }}">{{ codePostal}}</option>
+                            <option value="{{ codePostal  }}">{{ codePostal }}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
