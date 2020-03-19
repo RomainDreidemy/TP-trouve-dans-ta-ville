@@ -16,7 +16,6 @@ class HomeController extends AbstractController
     {
         if($_POST && isset($_POST)){
             if(!empty(trim($_POST['ville'])) && !empty(trim($_POST['codePostal']))){
-                dump($_POST);
                 $commune = (new GeoApi())->getCommuneBy([
                     ['nom', $_POST['ville']],
                     ['codePostal', $_POST['codePostal']]
@@ -28,6 +27,8 @@ class HomeController extends AbstractController
                         'pole_emploi',
                         'gendarmerie'
                     ]);
+
+//                    dd($ettablissements);
                 }else{
                     $this->addFlash('danger', 'Votre recherche ne correspond à aucune commune !');
                 }

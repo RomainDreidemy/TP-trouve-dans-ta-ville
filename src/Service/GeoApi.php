@@ -103,8 +103,6 @@ class GeoApi
             return [];
         }
 
-        dd($result);
-
         return [
             'nom' => $result[0]->nom,
             'code' => $result[0]->code,

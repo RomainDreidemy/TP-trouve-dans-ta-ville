@@ -66,6 +66,25 @@
                             <td>{{ etablissement.properties.telephone }}</td>
                             <td><a href="{{ etablissement.properties.url ?? ''}}" target="_blank">Cliquez-ici</a></td>
                         </tr>
+                        <tr>
+                            <td colspan="4">
+                                {% for horaires in etablissement.properties.horaires %}
+                                    <ul>
+
+                                    {% if horaires.du == horaires.au %}
+                                        Le {{ horaires.du }}
+                                    {% else %}
+                                        Du {{ horaires.du }} au {{ horaires.au }} :
+                                    {% endif %}
+                                        {% for heures in horaires.heures %}
+                                            <li>de {{ heures.de }} à {{ heures.a }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                                {% endfor %}
+
+                            </td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>
